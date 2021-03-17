@@ -18,7 +18,7 @@ export default function Breadcrumb() {
     const classes = useStyles();
 
     return (
-        <Container className={classes.breadcrumb} maxWidth="md">
+        <Container className={classes.breadcrumb} maxWidth="lg">
             <Breadcrumbs aria-label="breadcrumb">
                 <Link color="inherit" href="/" onClick={handleClick}>
                     Material-UI

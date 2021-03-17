@@ -21,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
     },
 }));
 
-export  default function BookCard() {
+export  default function BookCard({book}) {
 
     const classes = useStyles();
 
@@ -29,15 +29,15 @@ export  default function BookCard() {
         <Card className={classes.card}>
             <CardMedia
                 className={classes.cardMedia}
-                image="https://source.unsplash.com/random"
-                title="Image title"
+                image="https://picsum.photos/400/400"
+                title="{book.title}"
             />
             <CardContent className={classes.cardContent}>
                 <Typography gutterBottom variant="h5" component="h2">
-                    Heading
+                    {book.title}
                 </Typography>
                 <Typography>
-                    This is a media card. You can use this section to describe the content.
+                    {book.subtitle}
                 </Typography>
             </CardContent>
             <CardActions>
