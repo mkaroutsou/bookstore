@@ -1,6 +1,7 @@
 import React from "react";
-import {Breadcrumbs, Link, makeStyles} from "@material-ui/core";
+import {Breadcrumbs, makeStyles} from "@material-ui/core";
 import Container from "@material-ui/core/Container";
+import {NavLink} from "react-router-dom";
 
 function handleClick() {
     console.log('yolo');
@@ -20,20 +21,19 @@ export default function Breadcrumb() {
     return (
         <Container className={classes.breadcrumb} maxWidth="lg">
             <Breadcrumbs aria-label="breadcrumb">
-                <Link color="inherit" href="/" onClick={handleClick}>
-                    Material-UI
-                </Link>
-                <Link color="inherit" href="/getting-started/installation/" onClick={handleClick}>
-                    Core
-                </Link>
-                <Link
+                <NavLink color="inherit" to="/" onClick={handleClick}>
+                    Home
+                </NavLink>
+                {/*<Link color="inherit" href="/getting-started/installation/" onClick={handleClick}>*/}
+                {/*    Core*/}
+                {/*</Link>*/}
+                <NavLink
                     color="textPrimary"
-                    href="/components/breadcrumbs/"
-                    onClick={handleClick}
+                    to="/dummy"
                     aria-current="page"
                 >
-                    Breadcrumb
-                </Link>
+                    Dummy
+                </NavLink>
             </Breadcrumbs>
         </Container>
     )

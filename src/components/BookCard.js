@@ -6,6 +6,7 @@ import CardActions from "@material-ui/core/CardActions";
 import Button from "@material-ui/core/Button";
 import React from "react";
 import {makeStyles} from "@material-ui/core/styles";
+import {Link} from "react-router-dom";
 
 const useStyles = makeStyles((theme) => ({
     card: {
@@ -34,7 +35,7 @@ export  default function BookCard({book}) {
             />
             <CardContent className={classes.cardContent}>
                 <Typography gutterBottom variant="h5" component="h2">
-                    {book.title}
+                    <Link to={`/book/${book.isbn}`}>{book.title}</Link>
                 </Typography>
                 <Typography>
                     {book.subtitle}

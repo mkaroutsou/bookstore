@@ -9,9 +9,10 @@ import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Footer from "./Footer";
 import HeroContent from "./HeroContent";
-// import BookCard from "./BookCard";
 import Breadcrumb from "./Breadcrumb";
-import BookList from "./BookList";
+import {Route, Switch} from "react-router-dom";
+import Home from "../pages/Home";
+import BookPage from "../pages/BookPage";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -27,8 +28,6 @@ const useStyles = makeStyles((theme) => ({
         paddingBottom: theme.spacing(8),
     },
 }));
-
-// const cards = [1, 2, 3, 4, 5, 6, 7, 8, 9];
 
 export default function Layout() {
     const classes = useStyles();
@@ -49,7 +48,12 @@ export default function Layout() {
                     <HeroContent pageTitle={"Home"}/>
                     <Breadcrumb/>
                     <Container className={classes.cardGrid} maxWidth="lg">
-                        <BookList />
+                        <Switch>
+                            <Route exact path="/" component={Home} />
+                            <Route exact path="/book/:isbn" component={BookPage} />
+                            {/*<Route exact path="/category/:tag" component={CategoryPage} />*/}
+                            {/*<Route component={NotFound} />*/}
+                        </Switch>
                     </Container>
                 </main>
                 <Footer/>

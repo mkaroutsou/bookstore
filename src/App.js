@@ -1,13 +1,16 @@
 import './App.css';
-import Layout from "./components/Layout";
 import 'fontsource-roboto';
+import React from "react";
+import Layout from "./components/Layout";
+import {HashRouter} from "react-router-dom";
 
-function App() {
+
+export default function App() {
   return (
     <div className="App">
-      <Layout />
+        <HashRouter>
+            <Layout />
+        </HashRouter>
     </div>
   );
 }
-
-export default App;
