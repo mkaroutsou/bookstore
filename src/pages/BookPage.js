@@ -13,8 +13,8 @@ import { BooksContext } from '../App';
 
 const useStyles = makeStyles((theme) => ({
     cardGrid: {
-        paddingTop: theme.spacing(12),
-        paddingBottom: theme.spacing(12),
+        paddingTop: theme.spacing(8),
+        paddingBottom: theme.spacing(8),
     },
     media: {
         marginTop: theme.spacing(1),
@@ -67,7 +67,7 @@ export default function BookPage() {
 
 
     return (
-        <Grid container maxwidth="lg">
+        <Grid container maxwidth="lg" className={classes.cardGrid}>
             <Grid item md={4}>
                 <Paper variant="outlined">
                     <img src="https://picsum.photos/400/400" alt="{book.title}"/>

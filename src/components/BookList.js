@@ -4,13 +4,12 @@ import React, {useContext, useEffect, useState} from "react";
 import {CircularProgress,} from "@material-ui/core";
 import {Alert} from "@material-ui/lab";
 import {BooksContext} from '../App';
-import {SearchContext} from "./Layout";
+import {SearchContext} from "../pages/Home";
 
 const searchForBook = ({title, subtitle}, searchBook) => (
     title.toLowerCase().search(searchBook.toLowerCase()) !== -1 ||
     subtitle.toLowerCase().search(searchBook.toLowerCase()) !== -1
 );
-
 
 export default function BookList() {
     const [booksList, setBooksList] = useState([]);
