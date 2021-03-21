@@ -12,7 +12,10 @@ import { Route, Switch} from "react-router-dom";
 import Home from "../pages/Home";
 import BookPage from "../pages/BookPage";
 import SearchBar from "./SearchBar";
-import debounce from 'lodash.debounce';
+import AddProduct from "./AddProduct";
+// import debounce from 'lodash.debounce';
+// import {Paper} from "@material-ui/core";
+// import AddProduct from "./AddProduct";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -45,8 +48,13 @@ export default function Layout() {
     const classes = useStyles();
     const [searchBook, setSearchBook] = useState('');
 
+    // @todo add throttling
     const handleSearch = (e) => {
-        return debounce(() => setSearchBook(e.target.value), 500);
+        // console.log(e.target.value)
+        setSearchBook(e.target.value)
+        // return debounce(() => setSearchBook(e.target.value), 500);
+        // useThrottle(() => console.log(e.target.value), 1000, [e.target.value]);
+
     };
 
 
@@ -80,6 +88,7 @@ export default function Layout() {
                                 {/*<Route exact path="/category/:tag" component={CategoryPage} />*/}
                                 {/*<Route component={NotFound} />*/}
                             </Switch>
+                            <AddProduct />
                         </Container>
                     </main>
                 </SearchContext.Provider>

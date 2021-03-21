@@ -3,11 +3,12 @@ import BookCard from "./BookCard";
 import React, {useContext, useEffect, useState} from "react";
 import {CircularProgress,} from "@material-ui/core";
 import {Alert} from "@material-ui/lab";
-import { BooksContext } from '../App';
+import {BooksContext} from '../App';
 import {SearchContext} from "./Layout";
 
-const searchForBook = ({title}, searchBook) => (
-    title.toLowerCase().search(searchBook.toLowerCase()) !== -1
+const searchForBook = ({title, subtitle}, searchBook) => (
+    title.toLowerCase().search(searchBook.toLowerCase()) !== -1 ||
+    subtitle.toLowerCase().search(searchBook.toLowerCase()) !== -1
 );
 
 
@@ -16,7 +17,7 @@ export default function BookList() {
     const [errorData, setErrorData] = useState(null);
     const [loading, setLoading] = useState(false);
     const books = useContext(BooksContext);
-    const searchBook = useContext(SearchContext);
+    const searchBookTitle = useContext(SearchContext);
 
     useEffect(() => {
         setLoading(true);
@@ -24,27 +25,26 @@ export default function BookList() {
             setLoading(false);
             setBooksList(books)
 
-            // @todo add throttling
-            if (searchBook !== '') {
-                let results = books.filter((book) => searchForBook(book, searchBook));
+            if (searchBookTitle !== '') {
+                let results = books.filter((book) => searchForBook(book, searchBookTitle));
                 if (results.length > 0) {
                     setBooksList(results)
-                }else {
+                } else {
                     setErrorData("No results available. Search again")
                 }
             }
 
-            if (searchBook === '') {
+            if (searchBookTitle === '') {
                 setErrorData(null)
                 setBooksList(books)
             }
 
-        } else{
+        } else {
             setLoading(false)
             setErrorData("No books available")
         }
 
-    }, [books,searchBook]);
+    }, [books, searchBookTitle]);
 
 
     if (loading) {
