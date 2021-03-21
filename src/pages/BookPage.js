@@ -1,16 +1,15 @@
-import React, {useEffect, useState} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import {useParams} from "react-router-dom";
-import data from '../data/books.json';
 import {Avatar, Box, CircularProgress, List, ListItem, ListItemText, Paper} from "@material-ui/core";
-import {Alert, AlertTitle} from "@material-ui/lab";
+import {Alert} from "@material-ui/lab";
 import Grid from "@material-ui/core/Grid";
 import Typography from "@material-ui/core/Typography";
 import Button from "@material-ui/core/Button";
 import {deepPurple} from "@material-ui/core/colors";
-import Carousel from "react-material-ui-carousel";
-import BookCard from "../components/BookCard";
-
+// import Carousel from "react-material-ui-carousel";
+// import BookCard from "../components/BookCard";
+import { BooksContext } from '../App';
 
 const useStyles = makeStyles((theme) => ({
     cardGrid: {
@@ -22,7 +21,7 @@ const useStyles = makeStyles((theme) => ({
         marginBottom: theme.spacing(1),
     },
     button: {
-        margin: theme.spacing.unit,
+        margin: theme.spacing(1),
     },
     avatar: {
         margin: 10,
@@ -40,17 +39,18 @@ export default function BookPage() {
     const [book, setBook] = useState([])
     const [errorData, setErrorData] = useState(null);
     const [loading, setLoading] = useState(false);
+    const books = useContext(BooksContext);
 
     useEffect(() => {
         setLoading(true)
-        if (data.books.find(x => x.isbn === isbn)) {
+        if (books.find(x => x.isbn === isbn)) {
             setLoading(false);
-            setBook(data.books.find(x => x.isbn === isbn));
+            setBook(books.find(x => x.isbn === isbn));
         } else {
             setLoading(false);
             setErrorData("No book available");
         }
-    }, [isbn]);
+    }, [books,isbn]);
 
 
     if (loading) {
@@ -60,7 +60,6 @@ export default function BookPage() {
     if (errorData) {
         return (
             <Alert severity="error">
-                <AlertTitle>Error</AlertTitle>
                 {errorData}>
             </Alert>
         )
@@ -68,7 +67,7 @@ export default function BookPage() {
 
 
     return (
-        <Grid container maxWidth="lg">
+        <Grid container maxwidth="lg">
             <Grid item md={4}>
                 <Paper variant="outlined">
                     <img src="https://picsum.photos/400/400" alt="{book.title}"/>
@@ -100,13 +99,13 @@ export default function BookPage() {
                     BUY
                 </Button>
             </Grid>
-            <Grid item md={12}>
-                <Carousel item xs={12}>
-                    {
-                        data.books.map( (item, i) => <Grid item xs={4}><BookCard key={i} book={item} /></Grid> )
-                    }
-                </Carousel>
-            </Grid>
+            {/*<Grid item md={12}>*/}
+            {/*    <Carousel item xs={12}>*/}
+            {/*        {*/}
+            {/*            books.map( (item, i) => <Grid item xs={4}><BookCard key={i} book={item} /></Grid> )*/}
+            {/*        }*/}
+            {/*    </Carousel>*/}
+            {/*</Grid>*/}
         </Grid>
     );
 }

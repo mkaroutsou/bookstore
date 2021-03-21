@@ -1,25 +1,50 @@
 import Grid from "@material-ui/core/Grid";
 import BookCard from "./BookCard";
-import React, {useEffect, useState} from "react";
+import React, {useContext, useEffect, useState} from "react";
 import {CircularProgress,} from "@material-ui/core";
-import data from '../data/books.json';
-import {Alert, AlertTitle} from "@material-ui/lab";
+import {Alert} from "@material-ui/lab";
+import { BooksContext } from '../App';
+import {SearchContext} from "./Layout";
+
+const searchForBook = ({title}, searchBook) => (
+    title.toLowerCase().search(searchBook.toLowerCase()) !== -1
+);
+
 
 export default function BookList() {
     const [booksList, setBooksList] = useState([]);
     const [errorData, setErrorData] = useState(null);
     const [loading, setLoading] = useState(false);
+    const books = useContext(BooksContext);
+    const searchBook = useContext(SearchContext);
 
     useEffect(() => {
         setLoading(true);
-        if (data.books.length > 0) {
+        if (books.length > 0) {
             setLoading(false);
-            setBooksList(data.books)
+            setBooksList(books)
+
+            // @todo add throttling
+            if (searchBook !== '') {
+                let results = books.filter((book) => searchForBook(book, searchBook));
+                if (results.length > 0) {
+                    setBooksList(results)
+                }else {
+                    setErrorData("No results available. Search again")
+                }
+            }
+
+            if (searchBook === '') {
+                setErrorData(null)
+                setBooksList(books)
+            }
+
         } else{
             setLoading(false)
             setErrorData("No books available")
         }
-    }, []);
+
+    }, [books,searchBook]);
 
 
     if (loading) {
@@ -30,8 +55,7 @@ export default function BookList() {
     if (errorData) {
         return (
             <Alert severity="error">
-                <AlertTitle>Error</AlertTitle>
-                {errorData}>
+                {errorData}
             </Alert>
         )
     }
