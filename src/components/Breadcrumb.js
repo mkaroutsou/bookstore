@@ -24,14 +24,7 @@ export default function Breadcrumb() {
                 <NavLink color="inherit" to="/" onClick={handleClick}>
                     Home
                 </NavLink>
-                {/*<Link color="inherit" href="/getting-started/installation/" onClick={handleClick}>*/}
-                {/*    Core*/}
-                {/*</Link>*/}
-                <NavLink
-                    color="textPrimary"
-                    to="/dummy"
-                    aria-current="page"
-                >
+                <NavLink color="textPrimary" to="/dummy" aria-current="page">
                     Dummy
                 </NavLink>
             </Breadcrumbs>
