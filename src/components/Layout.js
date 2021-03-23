@@ -11,11 +11,6 @@ import Breadcrumb from "./Breadcrumb";
 import {Route, Switch} from "react-router-dom";
 import Home from "../pages/Home";
 import BookPage from "../pages/BookPage";
-// import SearchBar from "./SearchBar";
-import AddProduct from "./AddProduct";
-// import debounce from 'lodash.debounce';
-// import {Paper} from "@material-ui/core";
-// import AddProduct from "./AddProduct";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -56,7 +51,6 @@ export default function Layout() {
                             <Route exact path="/" component={Home}/>
                             <Route exact path="/book/:isbn" component={BookPage}/>
                         </Switch>
-                        <AddProduct/>
                     </Container>
                 </main>
                 <Footer/>

@@ -5,6 +5,7 @@ import {CircularProgress,} from "@material-ui/core";
 import {Alert} from "@material-ui/lab";
 import {BooksContext} from '../App';
 import {SearchContext} from "../pages/Home";
+import AddBook from "./AddBook";
 
 const searchForBook = ({title, subtitle}, searchBook) => (
     title.toLowerCase().search(searchBook.toLowerCase()) !== -1 ||
@@ -45,11 +46,14 @@ export default function BookList() {
 
     }, [books, searchBookTitle]);
 
+    const addBook = async (newBook) => {
+        setBooksList([...books, newBook]);
+        console.log(newBook);
+    };
 
     if (loading) {
         return <CircularProgress/>
     }
-
 
     if (errorData) {
         return (
@@ -60,12 +64,15 @@ export default function BookList() {
     }
 
     return (
-        <Grid container spacing={4}>
-            {booksList.map((book) => (
-                <Grid item key={book.isbn} xs={12} sm={6} md={3}>
-                    <BookCard book={book}/>
-                </Grid>
-            ))}
-        </Grid>
+        <React.Fragment>
+            <Grid container spacing={4}>
+                {booksList.map((book) => (
+                    <Grid item key={book.isbn} xs={12} sm={6} md={3}>
+                        <BookCard book={book}/>
+                    </Grid>
+                ))}
+            </Grid>
+            <AddBook addBook={addBook}/>
+        </React.Fragment>
     )
 }

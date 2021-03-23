@@ -7,8 +7,8 @@ import data from './data/books.json';
 
 export const BooksContext = React.createContext(data.books);
 
-export default function App() {
 
+export default function App() {
     return (
         <div className="App">
             <HashRouter>
