@@ -49,7 +49,7 @@ export default function Layout() {
                     <Container className={classes.cardGrid} maxWidth="lg">
                         <Switch>
                             <Route exact path="/" component={Home}/>
-                            <Route exact path="/book/:isbn" component={BookPage}/>
+                            {/*<Route exact path="/book/:isbn" component={BookPage}/>*/}
                         </Switch>
                     </Container>
                 </main>

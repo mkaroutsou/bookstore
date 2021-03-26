@@ -9,7 +9,7 @@ import Button from "@material-ui/core/Button";
 import {deepPurple} from "@material-ui/core/colors";
 // import Carousel from "react-material-ui-carousel";
 // import BookCard from "../components/BookCard";
-import { BooksContext } from '../App';
+// import { BooksContext } from '../App';
 
 const useStyles = makeStyles((theme) => ({
     cardGrid: {
@@ -36,22 +36,22 @@ const useStyles = makeStyles((theme) => ({
 export default function BookPage() {
     const classes = useStyles();
     const {isbn} = useParams()
-    const [book, setBook] = useState([])
+    // const [book, setBook] = useState([])
     const [errorData, setErrorData] = useState(null);
     const [loading, setLoading] = useState(false);
-    const books = useContext(BooksContext);
+    // const books = useContext(BooksContext);
 
-    useEffect(() => {
-        setLoading(true)
-        console.log(books)
-        if (books.find(x => x.isbn === isbn)) {
-            setLoading(false);
-            setBook(books.find(x => x.isbn === isbn));
-        } else {
-            setLoading(false);
-            setErrorData("No book available");
-        }
-    }, [books,isbn]);
+    // useEffect(() => {
+    //     setLoading(true)
+    //     console.log(books)
+    //     if (books.find(x => x.isbn === isbn)) {
+    //         setLoading(false);
+    //         setBook(books.find(x => x.isbn === isbn));
+    //     } else {
+    //         setLoading(false);
+    //         setErrorData("No book available");
+    //     }
+    // }, [books,isbn]);
 
 
     if (loading) {
@@ -69,44 +69,44 @@ export default function BookPage() {
 
     return (
         <Grid container maxwidth="lg" className={classes.cardGrid}>
-            <Grid item md={4}>
-                <Paper variant="outlined">
-                    <img src="https://picsum.photos/400/400" alt="{book.title}"/>
-                </Paper>
-                <Box display="flex" alignItems="center">
-                    <Avatar className={classes.purpleAvatar}>{book.author?.substr(0, 1)}</Avatar>{book.author}
-                </Box>
-            </Grid>
-            <Grid item md={6}>
-                <Typography variant="h1" color="textSecondary">{book.title}</Typography>
-                <Typography variant="body1">{book.description}</Typography>
-
-                <Box display="flex" alignItems="center" justifyContent="center">
-                    <Button variant="outlined" color="primary" size="small" className={classes.button}>
-                        Follow
-                    </Button>
-                    <Button variant="outlined" color="secondary" size="small" className={classes.button}>
-                        Share
-                    </Button>
-                </Box>
-
-                <List>
-                    <ListItem><ListItemText xs={12} primary={`Categories: #tag 1, #tag 2`}/></ListItem>
-                    <ListItem><ListItemText xs={12} primary={`Year: ${book.published}`}/></ListItem>
-                    <ListItem><ListItemText xs={12} primary={`Pages: ${book.pages}`}/></ListItem>
-                </List>
-
-                <Button variant="contained" color="primary" size="large" className={classes.button}>
-                    BUY
-                </Button>
-            </Grid>
-            {/*<Grid item md={12}>*/}
-            {/*    <Carousel item xs={12}>*/}
-            {/*        {*/}
-            {/*            books.map( (item, i) => <Grid item xs={4}><BookCard key={i} book={item} /></Grid> )*/}
-            {/*        }*/}
-            {/*    </Carousel>*/}
+            {/*<Grid item md={4}>*/}
+            {/*    <Paper variant="outlined">*/}
+            {/*        <img src="https://picsum.photos/400/400" alt="{book.title}"/>*/}
+            {/*    </Paper>*/}
+            {/*    <Box display="flex" alignItems="center">*/}
+            {/*        <Avatar className={classes.purpleAvatar}>{book.author?.substr(0, 1)}</Avatar>{book.author}*/}
+            {/*    </Box>*/}
             {/*</Grid>*/}
+            {/*<Grid item md={6}>*/}
+            {/*    <Typography variant="h1" color="textSecondary">{book.title}</Typography>*/}
+            {/*    <Typography variant="body1">{book.description}</Typography>*/}
+
+            {/*    <Box display="flex" alignItems="center" justifyContent="center">*/}
+            {/*        <Button variant="outlined" color="primary" size="small" className={classes.button}>*/}
+            {/*            Follow*/}
+            {/*        </Button>*/}
+            {/*        <Button variant="outlined" color="secondary" size="small" className={classes.button}>*/}
+            {/*            Share*/}
+            {/*        </Button>*/}
+            {/*    </Box>*/}
+
+            {/*    <List>*/}
+            {/*        <ListItem><ListItemText xs={12} primary={`Categories: #tag 1, #tag 2`}/></ListItem>*/}
+            {/*        <ListItem><ListItemText xs={12} primary={`Year: ${book.published}`}/></ListItem>*/}
+            {/*        <ListItem><ListItemText xs={12} primary={`Pages: ${book.pages}`}/></ListItem>*/}
+            {/*    </List>*/}
+
+            {/*    <Button variant="contained" color="primary" size="large" className={classes.button}>*/}
+            {/*        BUY*/}
+            {/*    </Button>*/}
+            {/*</Grid>*/}
+            {/*/!*<Grid item md={12}>*!/*/}
+            {/*/!*    <Carousel item xs={12}>*!/*/}
+            {/*/!*        {*!/*/}
+            {/*/!*            books.map( (item, i) => <Grid item xs={4}><BookCard key={i} book={item} /></Grid> )*!/*/}
+            {/*/!*        }*!/*/}
+            {/*/!*    </Carousel>*!/*/}
+            {/*/!*</Grid>*!/*/}
         </Grid>
     );
 }

@@ -3,18 +3,16 @@ import Layout from "./components/Layout";
 import {HashRouter} from "react-router-dom";
 import './App.css';
 import 'fontsource-roboto';
-import data from './data/books.json';
-
-export const BooksContext = React.createContext(data.books);
+import {BooksProvider} from "./context/BooksContext";
 
 
 export default function App() {
     return (
         <div className="App">
             <HashRouter>
-                <BooksContext.Provider value={data.books}>
+                <BooksProvider>
                     <Layout/>
-                </BooksContext.Provider>
+                </BooksProvider>
             </HashRouter>
         </div>
     );

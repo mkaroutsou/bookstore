@@ -3,7 +3,7 @@ import BookCard from "./BookCard";
 import React, {useContext, useEffect, useState} from "react";
 import {CircularProgress,} from "@material-ui/core";
 import {Alert} from "@material-ui/lab";
-import {BooksContext} from '../App';
+import { BooksContext } from '../context/BooksContext'
 import {SearchContext} from "../pages/Home";
 import AddBook from "./AddBook";
 
@@ -13,11 +13,12 @@ const searchForBook = ({title, subtitle}, searchBook) => (
 );
 
 export default function BookList() {
-    const [booksList, setBooksList] = useState([]);
+    const { state, updateBooks } = useContext(BooksContext)
+    const [booksList, setBooksList] = useState([state.books]);
     const [errorData, setErrorData] = useState(null);
     const [loading, setLoading] = useState(false);
-    const books = useContext(BooksContext);
     const searchBookTitle = useContext(SearchContext);
+    const books = state.books;
 
     useEffect(() => {
         setLoading(true);
@@ -48,7 +49,8 @@ export default function BookList() {
 
     const addBook = async (newBook) => {
         setBooksList([...books, newBook]);
-        console.log(newBook);
+        updateBooks({ newBook })
+        // console.log(newBook);
     };
 
     if (loading) {
