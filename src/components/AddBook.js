@@ -1,6 +1,5 @@
 import React, {useState} from 'react';
 import Button from '@material-ui/core/Button';
-import TextField from '@material-ui/core/TextField';
 import Dialog from '@material-ui/core/Dialog';
 import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
@@ -8,7 +7,7 @@ import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
 import {Fab, FormControl, Input, InputLabel, makeStyles, MenuItem, Select} from "@material-ui/core";
 import SaveIcon from '@material-ui/icons/Save';
-import {ValidatorForm, TextValidator, SelectValidator} from 'react-material-ui-form-validator';
+import {ValidatorForm, TextValidator} from 'react-material-ui-form-validator';
 
 
 const useStyles = makeStyles((theme) => ({
@@ -44,13 +43,13 @@ export default function AddBook({addBook}) {
         categoryName: [],
         author: "",
         publisher: "",
-        year: "",
+        published: "",
         pages: "",
         isbn10: "",
         isbn: ""
     };
     const [eachEntry, setEachEntry] = useState(initialInputState);
-    const {title, description, categoryName, author, publisher, year, pages, isbn10, isbn} = eachEntry;
+    const {title, description, categoryName, author, publisher, published, pages, isbn10, isbn} = eachEntry;
 
     const handleInputChange = e => {
         setEachEntry({...eachEntry, [e.target.name]: e.target.value});
@@ -132,7 +131,7 @@ export default function AddBook({addBook}) {
                                        validators={['minStringLength:5', 'maxStringLength:60']}
                                        errorMessages={['too small', 'too big']}/>
                         {/*Publication Year*/}
-                        <TextValidator required name="year" label="Publication Year" value={year} type="number"
+                        <TextValidator required name="published" label="Publication Year" value={published} type="number"
                                        fullWidth className={classes.formControl} onChange={handleInputChange}
                                        validators={['minNumber:1000', 'maxNumber:9999']}
                                        errorMessages={['invalid year', 'invalid year']}/>

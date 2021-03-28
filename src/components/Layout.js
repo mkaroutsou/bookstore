@@ -8,9 +8,10 @@ import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Footer from "./Footer";
 import Breadcrumb from "./Breadcrumb";
-import {Route, Switch} from "react-router-dom";
+import {NavLink, Route, Switch} from "react-router-dom";
 import Home from "../pages/Home";
 import BookPage from "../pages/BookPage";
+import {Link} from "@material-ui/core";
 
 const useStyles = makeStyles((theme) => ({
     root: {
@@ -25,6 +26,10 @@ const useStyles = makeStyles((theme) => ({
         paddingTop: theme.spacing(1),
         paddingBottom: theme.spacing(4),
     },
+    logo: {
+        color: '#fff',
+        textDecoration: 'none'
+    }
 }));
 
 
@@ -40,7 +45,7 @@ export default function Layout() {
                     <Toolbar>
                         <Book className={classes.icon}/>
                         <Typography variant="h6" color="inherit" noWrap>
-                            Our Bookstore
+                            <NavLink to="/" className={classes.logo}>Our Bookstore</NavLink>
                         </Typography>
                     </Toolbar>
                 </AppBar>
@@ -49,7 +54,7 @@ export default function Layout() {
                     <Container className={classes.cardGrid} maxWidth="lg">
                         <Switch>
                             <Route exact path="/" component={Home}/>
-                            {/*<Route exact path="/book/:isbn" component={BookPage}/>*/}
+                            <Route exact path="/book/:isbn" component={BookPage}/>
                         </Switch>
                     </Container>
                 </main>

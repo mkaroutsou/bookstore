@@ -4,7 +4,6 @@ import Container from '@material-ui/core/Container';
 import BookList from "../components/BookList";
 import Typography from "@material-ui/core/Typography";
 import SearchBar from "../components/SearchBar";
-
 const useStyles = makeStyles((theme) => ({
     cardGrid: {
         paddingTop: theme.spacing(8),
@@ -22,7 +21,7 @@ export const SearchContext = React.createContext('');
 
 export default function Home() {
     const classes = useStyles();
-    const [searchBook, setSearchBook] = useState('');
+    const [searchBook, setSearchBook] = useState(null);
 
     // @todo add throttling
     const handleSearch = (e) => {

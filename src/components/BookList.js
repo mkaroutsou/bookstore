@@ -3,41 +3,37 @@ import BookCard from "./BookCard";
 import React, {useContext, useEffect, useState} from "react";
 import {CircularProgress,} from "@material-ui/core";
 import {Alert} from "@material-ui/lab";
-import { BooksContext } from '../context/BooksContext'
-import {SearchContext} from "../pages/Home";
 import AddBook from "./AddBook";
+import {SearchContext} from "../pages/Home";
+import {BooksContext} from "../context/BooksContext";
 
-const searchForBook = ({title, subtitle}, searchBook) => (
-    title.toLowerCase().search(searchBook.toLowerCase()) !== -1 ||
-    subtitle.toLowerCase().search(searchBook.toLowerCase()) !== -1
-);
 
 export default function BookList() {
-    const { state, updateBooks } = useContext(BooksContext)
-    const [booksList, setBooksList] = useState([state.books]);
+    const searchBookTitle = useContext(SearchContext);
     const [errorData, setErrorData] = useState(null);
     const [loading, setLoading] = useState(false);
-    const searchBookTitle = useContext(SearchContext);
-    const books = state.books;
+    const [books, setBooks] = useContext(BooksContext);
+
 
     useEffect(() => {
         setLoading(true);
+
         if (books.length > 0) {
             setLoading(false);
-            setBooksList(books)
 
-            if (searchBookTitle !== '') {
+            if (searchBookTitle && searchBookTitle !== '') {
                 let results = books.filter((book) => searchForBook(book, searchBookTitle));
                 if (results.length > 0) {
-                    setBooksList(results)
+                    setBooks(results)
+
                 } else {
                     setErrorData("No results available. Search again")
                 }
             }
 
-            if (searchBookTitle === '') {
+            if (searchBookTitle && searchBookTitle === '') {
                 setErrorData(null)
-                setBooksList(books)
+                setBooks(books)
             }
 
         } else {
@@ -45,12 +41,19 @@ export default function BookList() {
             setErrorData("No books available")
         }
 
-    }, [books, searchBookTitle]);
+    }, [books, setBooks, searchBookTitle]);
 
     const addBook = async (newBook) => {
-        setBooksList([...books, newBook]);
-        updateBooks({ newBook })
-        // console.log(newBook);
+        setBooks([...books, newBook]);
+    };
+
+    const searchForBook = ({title, subtitle}, searchBook) => {
+        // if (searchBook) {
+            return (
+                title.toLowerCase().search(searchBook.toLowerCase()) !== -1 ||
+                subtitle.toLowerCase().search(searchBook.toLowerCase()) !== -1
+            )
+        // }
     };
 
     if (loading) {
@@ -68,7 +71,7 @@ export default function BookList() {
     return (
         <React.Fragment>
             <Grid container spacing={4}>
-                {booksList.map((book) => (
+                {books.map((book) => (
                     <Grid item key={book.isbn} xs={12} sm={6} md={3}>
                         <BookCard book={book}/>
                     </Grid>
