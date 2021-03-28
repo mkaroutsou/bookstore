@@ -64,7 +64,9 @@ export default function AddBook({addBook}) {
     };
 
     const handleSubmit = () => {
-        console.log('submit form');
+        addBook(eachEntry);
+        setEachEntry(initialInputState);
+        setOpen(false);
     }
 
     return (
@@ -158,7 +160,7 @@ export default function AddBook({addBook}) {
                     <Button onClick={handleClose} color="primary">
                         Cancel
                     </Button>
-                    <Button color="primary" onClick={() => addBook(eachEntry)}>
+                    <Button color="primary" onClick={handleSubmit}>
                         Save
                     </Button>
                 </DialogActions>

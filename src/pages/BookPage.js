@@ -101,13 +101,6 @@ export default function BookPage() {
                     BUY
                 </Button>
             </Grid>
-            {/*<Grid item md={12}>*/}
-            {/*    <Carousel item xs={12}>*/}
-            {/*        {*/}
-            {/*            books.map( (item, i) => <Grid item xs={4}><BookCard key={i} book={item} /></Grid> )*/}
-            {/*        }*/}
-            {/*    </Carousel>*/}
-            {/*</Grid>*/}
         </Grid>
     );
 }
