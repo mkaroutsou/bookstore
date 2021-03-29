@@ -41,7 +41,6 @@ export default function BookPage() {
 
     useEffect(() => {
         setLoading(true)
-        console.log(books)
         if (books.find(x => x.isbn === isbn)) {
             setLoading(false);
             setBook(books.find(x => x.isbn === isbn));

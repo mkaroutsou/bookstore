@@ -29,7 +29,7 @@ export  default function BookCard({book}) {
             <CardMedia
                 className={classes.cardMedia}
                 image="https://picsum.photos/400/400"
-                title="{book.title}"
+                title={book.title}
             />
             <CardContent className={classes.cardContent}>
                 <Typography gutterBottom variant="h5" component="h2">

@@ -25,10 +25,9 @@ export default function BookList() {
             setErrorData("No books available")
         }
 
-    }, [results, setResults, books, setBooks]);
+    }, [results, books]);
 
     const addBook = async (newBook) => {
-        console.log('er')
         setBooks([...books, newBook]);
         setResults(books)
     };

@@ -89,17 +89,20 @@ export default function AddBook({addBook}) {
                         To create a new Product, please fill the following fields.
                     </DialogContentText>
                     <ValidatorForm onSubmit={handleSubmit}>
+
                         {/*Title*/}
                         <TextValidator autoFocus name="title" label="Title" value={title} fullWidth
                                        className={classes.formControl} onChange={handleInputChange}
                                        validators={['minStringLength:10', 'maxStringLength:120', 'matchRegexp:([\\w!@"&*])']}
                                        errorMessages={['too small', 'too big', 'invalid character']}/>
+
                         {/*/!*Description*!/*/}
                         <TextValidator required name="description" label="Description" value={description} multiline
                                        rowsMax={4} fullWidth className={classes.formControl}
                                        onChange={handleInputChange}
                                        validators={['maxStringLength:520', 'matchRegexp:^[A-Z]']}
                                        errorMessages={['too big', 'must start with capital letter']}/>
+
                         {/*Categories field*/}
                         <FormControl className={classes.formControl} fullWidth>
                             <InputLabel id="categories-label">Categories</InputLabel>
@@ -137,6 +140,7 @@ export default function AddBook({addBook}) {
                                        fullWidth className={classes.formControl} onChange={handleInputChange}
                                        validators={['minNumber:1000', 'maxNumber:9999']}
                                        errorMessages={['invalid year', 'invalid year']}/>
+
                         {/*Number of pages*/}
                         <TextValidator required name="pages" label="Number of pages" value={pages} type="number"
                                        fullWidth className={classes.formControl} onChange={handleInputChange}
@@ -153,7 +157,6 @@ export default function AddBook({addBook}) {
                                        className={classes.formControl} onChange={handleInputChange}
                                        validators={['minNumber:1000000000000', 'maxNumber:9999999999999']}
                                        errorMessages={['invalid isbn', 'invalid isbn']}/>
-
                     </ValidatorForm>
                 </DialogContent>
                 <DialogActions>

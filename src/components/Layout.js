@@ -7,7 +7,6 @@ import Typography from '@material-ui/core/Typography';
 import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import Footer from "./Footer";
-import Breadcrumb from "./Breadcrumb";
 import {NavLink, Route, Switch} from "react-router-dom";
 import Home from "../pages/Home";
 import BookPage from "../pages/BookPage";
@@ -49,7 +48,6 @@ export default function Layout() {
                     </Toolbar>
                 </AppBar>
                 <main>
-                    <Breadcrumb/>
                     <Container className={classes.cardGrid} maxWidth="lg">
                         <Switch>
                             <Route exact path="/" component={Home}/>
