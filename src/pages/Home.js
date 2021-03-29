@@ -1,4 +1,4 @@
-import React, {useState, useContext, useCallback} from 'react';
+import React, {useState, useContext} from 'react';
 import {makeStyles} from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 import BookList from "../components/BookList";
@@ -27,27 +27,18 @@ export default function Home() {
     const classes = useStyles();
     const [books, setBooks] = useContext(BooksContext);
     const [results, setResults] = useState(books);
-    const [searchString, setSearchString] = useState([]);
 
-
-    const handleSearch = (e) => {
-        setSearchString(e.target.value);
-        searchForBook(searchString);
-    }
-
-    const searchForBook = useCallback(
-        debounce(searchString => {
-            let searchResults = books;
-            if (searchString) {
-                searchResults = books.filter(({title, subtitle}) =>
-                    title.toLowerCase().search(searchString.toLowerCase()) !== -1 ||
-                    subtitle.toLowerCase().search(searchString.toLowerCase()) !== -1
-                )
-            }
-            setResults(searchResults);
-        }, 1000),
-        [],
-    );
+    const debouncedSearch = debounce((e) => {
+        let searchString = e.target.value
+        let searchResults = books;
+        if (searchString) {
+            searchResults = books.filter(({title, subtitle}) =>
+                title.toLowerCase().search(searchString.toLowerCase()) !== -1 ||
+                subtitle?.toLowerCase().search(searchString.toLowerCase()) !== -1
+            )
+        }
+        setResults(searchResults);
+    }, 1000)
 
     return (
         <SearchContext.Provider value={[results, setResults]}>
@@ -56,7 +47,7 @@ export default function Home() {
                     <Typography component="h1" variant="h2" align="center" color="textPrimary" gutterBottom>
                         Home
                     </Typography>
-                    <SearchBar className={classes.search} onSearch={handleSearch}/>
+                    <SearchBar className={classes.search} onSearch={debouncedSearch}/>
                 </Container>
             </div>
             <Container className={classes.cardGrid} maxWidth="lg">
